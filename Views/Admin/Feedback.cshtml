@@ -1,0 +1,112 @@
+﻿@model IEnumerable<shopinn4.Models.Feedback>
+
+@{
+    ViewBag.Title = "Feedback";
+}
+
+
+
+<html>
+    <head>
+        <title>
+
+        </title>
+        <style>
+            body {margin:0px;
+            }
+            #container {height:600px;width:100%;background-color:blue;
+            }
+            #container-left {height:600px;width:20%;background-color:gray;float:left;
+            }
+            #container-mid {height:600px;width:60%;background-color:aliceblue;float:left;
+            }
+            #container-right {height:600px;width:20%;background-color:gray;float:left;
+            }
+            #menu {margin:0px;padding:0px;
+            }
+            #menu>li {
+                list-style: none;
+                display: inline-block;
+                padding:10px 0px;
+                background-color:blue;
+                margin-right:-1px;
+            }
+                #menu > li > a {text-decoration:none;color:white;padding:10px 25px;
+                }
+        </style>
+    </head>
+    <body>
+<h2>
+Welcome <span style="color:red;">@Session["admin"]</span> <label style="margin-left:1000px;">@Html.ActionLink("Logoff","Logout")</label>
+    </h2>
+<hr />
+        <div id="container">
+        <div id="container-left">
+
+        </div>
+        <div id="container-mid">
+<ul id="menu">
+    <li><a href="~/Admin/Catagory">Add Catagory</a></li>
+    <li><a href="~/Admin/Product">Add Product</a></li>
+    <li><a href="~/Admin/Orders">View Orders</a></li>
+    <li><a href="~/Admin/Feedback">View FeedBack</a></li>
+</ul>
+
+
+<h2>Feedback</h2>
+<p style="color:red;">@ViewBag.m1</p>
+
+<table width="100%">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+        </div>
+         <div id="container-right">
+
+        </div>
+        </div>
+    </body>
+</html>
+

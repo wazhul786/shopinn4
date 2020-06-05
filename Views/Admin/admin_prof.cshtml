@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "admin_prof";
+}
+
+
+<html>
+    <head>
+        <title>
+
+        </title>
+        <style>
+            body {margin:0px;
+            }
+            #container {height:600px;width:100%;background-color:blue;
+            }
+            #container-left {height:600px;width:20%;background-color:gray;float:left;
+            }
+            #container-mid {height:600px;width:60%;background-color:aliceblue;float:left;
+            }
+            #container-right {height:600px;width:20%;background-color:gray;float:left;
+            }
+            #menu {margin:0px;padding:0px;
+            }
+            #menu>li {
+                list-style: none;
+                display: inline-block;
+                padding:10px 0px;
+                background-color:black;
+                margin-right:-1px;
+            }
+                #menu > li > a {text-decoration:none;color:white;padding:10px 25px;
+                }
+        </style>
+    </head>
+    <body>
+<h2>
+Welcome <span style="color:red;">@Session["admin"]</span> <label style="margin-left:1000px;">@Html.ActionLink("Logoff","Logout")</label>
+    </h2>
+<hr />
+        <div id="container">
+        <div id="container-left">
+
+        </div>
+        <div id="container-mid">
+<ul id="menu">
+    <li><a href="~/Admin/Catagory">Add Catagory</a></li>
+    <li><a href="~/Admin/Product">Add Product</a></li>
+    <li><a href="~/Admin/Orders">View Orders</a></li>
+    <li><a href="~/Admin/Feedback">View FeedBack</a></li>
+</ul>
+        </div>
+         <div id="container-right">
+
+        </div>
+        </div>
+    </body>
+</html>

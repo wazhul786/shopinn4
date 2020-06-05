@@ -1,0 +1,81 @@
+﻿
+<html>
+<head>
+    <title>
+
+    </title>
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        #container {
+            height: 600px;
+            width: 100%;
+            background-color: blue;
+        }
+
+        #container-left {
+            height: 600px;
+            width: 20%;
+            background-color: #00ffe5;
+            float: left;
+        }
+
+        #container-mid {
+            overflow: auto;
+            height: 600px;
+            width: 60%;
+            background-color: aliceblue;
+            float: left;
+        }
+
+        #container-right {
+            height: 600px;
+            width: 20%;
+            background-color: #00ffe5;
+            float: left;
+        }
+
+        #menu {
+            margin: 0px;
+            padding: 0px;
+        }
+
+            #menu > li {
+                list-style: none;
+                display: inline-block;
+                padding: 10px 0px;
+                background-color: violet;
+                margin-right: -1px;
+            }
+
+                #menu > li > a {
+                    text-decoration: none;
+                    color: white;
+                    padding: 10px 25px;
+                }
+    </style>
+</head>
+<body>
+    <h2>
+        Welcome To INDIACART.COM   @if (Session["user"] != null)
+        {<label style="margin-left:50px;color:red;">WELCOME @ViewBag.name</label><label style="margin-left:100px;">@Html.ActionLink("logout", "logout")</label> }<label style="margin-left:50px;color:red;">@ViewBag.y</label><label style="margin-left:400px;">@Html.ActionLink("Cart", "Cart_list", new { num = 1 }) (@ViewBag.count)</label>
+    </h2>
+    @Html.Partial("_Menu")
+    <hr />
+    <div id="container">
+        <div id="container-left">
+
+        </div>
+        <div id="container-mid">
+           <p> CALL US AT: 0011223344 </p>
+            <p>MAIL AT: indiacart@gmail.com</p>
+            <p>ADDRESS: INDIACART BUILDING, NAVI MUMBAI, 400701.</p>
+        </div>
+        <div id="container-right">
+
+        </div>
+    </div>
+</body>
+</html>

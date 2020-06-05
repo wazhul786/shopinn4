@@ -1,0 +1,40 @@
+﻿@model shopinn4.Models.admin
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>admin</legend>
+        <p style="color:red;">@ViewBag.msg</p>
+                <div class="editor-label">
+            @Html.LabelFor(model => model.AdminId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AdminId)
+            @Html.ValidationMessageFor(model => model.AdminId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <p>
+            <input type="submit" value="Login" />
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

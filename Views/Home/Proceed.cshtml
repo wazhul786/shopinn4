@@ -1,0 +1,202 @@
+﻿@model shopinn4.Models.Orders
+
+@{
+    ViewBag.Title = "Proceed";
+}
+
+@{
+    ViewBag.Title = "Welcome To Gift Gallery";
+}
+
+
+<html>
+    <head>
+        <title>
+
+        </title>
+        <style>
+            body {margin:0px;
+            }
+            #container {height:600px;width:100%;background-color:white;
+            }
+            #container-left {height:600px;width:20%;background-color:#00ffe5;float:left;
+            }
+            #container-mid {overflow:auto;height:600px;width:60%;background-color:aliceblue;float:left;
+            }
+            #container-right {height:600px;width:20%;background-color:#00ffe5;float:left;
+            }
+            #menu {margin:0px;padding:0px;
+            }
+            #menu>li {
+                list-style: none;
+                display: inline-block;
+                padding:10px 0px;
+                background-color:blue;
+                margin-right:-1px;
+            }
+                #menu > li > a {text-decoration:none;color:white;padding:10px 25px;
+                }
+        </style>
+    </head>
+    <body>
+<h2>
+Welcome To INDIACART.COM @if(Session["user"]!=null){<label style="margin-left:50px;color:red;">Welcome @ViewBag.name</label><label style="margin-left:100px;">@Html.ActionLink("logout","logout")</label> }<label style="margin-left:50px;color:red;">@ViewBag.y</label><label style="margin-left:400px;"></label>
+    </h2>
+        @Html.Partial("_Menu")
+<hr />
+        @{
+            var i = 0;
+            var j = 0;
+            var s = 0;
+        }
+        <div id="container">
+          <table border="0" width="100%">
+              <tr style="background-color:blue;color:white;"><td>Sl No</td><td>ProductName</td><td>ProductImage</td><td>ProductPrice(Rs)</td><td>Offer(%)</td><td>Net Price</td><td>Action</td></tr>
+              <tr><td colspan="7"><hr /></td></tr>
+              @foreach (var p in ViewBag.cart_list)
+              {
+                  i = i + 1;
+                  j = p.ProductPrice - p.ProductPrice * p.Offer/100;
+                  s = s + j;
+                <tr><td>@i</td><td>@p.ProductName</td><td><img src="~/Images/@p.ProductImage" height="80" width="60" /></td><td>@p.ProductPrice</td><td>@p.Offer</td><td>@j</td><td>@Html.ActionLink("Remove", "Remove", new { x=p.ID})</td></tr>
+              <tr><td colspan="7"><hr /></td></tr>
+              
+              }
+              <tr><td colspan="7"><hr /></td></tr>
+              <tr style="font-size:30px;"><td colspan="3">&nbsp;</td><td colspan="2">TOTAL</td><td colspan="2">@s /-</td></tr>
+              <tr><td colspan="7"><hr /></td></tr>
+              <tr><td colspan="7">@Html.ActionLink("Proceed", "Proceed", new { s=s})</td></tr>
+          </table> 
+            
+<h2>Proceed</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Orders</legend>
+<table border="1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Offer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MobileNo)
+        </th>
+        <th>
+            EmailId
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentDate)
+        </th>
+        
+    </tr>
+    @foreach (var t in ViewBag.cart_list)
+      {
+          j = t.ProductPrice - t.ProductPrice * t.Offer / 100;
+                
+    <tr>
+        <th>
+            <input type="text" name="Category" value="@t.Category" />
+        </th>
+        <th>
+            <input type="text" name="ProductName" value="@t.ProductName" />
+        </th>
+        <th>
+            <input type="text" name="ProductImage" value="@t.ProductImage" />
+        </th>
+        <th>
+            <input type="text" name="ProductPrice" value="@t.ProductPrice" />
+        </th>
+        <th>
+            <input type="text" name="Offer" value="@t.Offer" />
+        </th>
+        <th>
+            <input type="text" name="TotalPrice" value="@j" />
+        </th>
+        <th>
+            <input type="text" name="Name" value="@t.Name" />
+        </th>
+        <th>
+            <input type="text" name="PhoneNo" value="@t.PhoneNo" />
+        </th>
+        <th>
+            <input type="text" name="EmailId" value="@t.EmailId" />
+        </th>
+        <th>
+            <input type="text" name="Address" value="@t.Address" />
+           
+        </th>
+
+        <th>
+            <input type="text" name="City" value="@t.City" />
+        </th>
+        
+        <th>
+            <input type="text" name="CurrentDate" value="@DateTime.Now" />
+        </th>
+        
+    </tr>
+    }
+    </table>
+        <table border="1">
+            <tr><td>Bank</td><td>
+                <select name="bank">
+                    <option>Choose a bank</option>
+                    <option value="SBI">State Bank Of India</option>
+                    <option value="UBI">United Bank Of India</option>
+                    </select>
+                </td></tr>
+                <tr><td>Account Number</td><td>
+                <input type="text" name="accnum" />
+                </td></tr>
+                 <tr><td>Cvv</td><td>
+                <input type="password" name="cvv" />
+                </td></tr>
+                 <tr><td>order Number</td><td>
+                <input type="hidden" name="ordernum" value="aict/on/@s/17" />
+                     aict/on/@s/17
+                </td></tr>
+        </table>
+
+        <p>
+            <input type="submit" value="Checkout" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+        </div>
+    </body>
+</html>

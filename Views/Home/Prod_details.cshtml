@@ -1,0 +1,85 @@
+﻿
+@model shopinn4.Models.Product
+
+@{
+    ViewBag.Title = "Prod_details";
+}
+<html>
+    <head>
+        <title>
+
+        </title>
+        <style>
+            body {margin:0px;
+            }
+            #container {height:600px;width:100%;background-color:blue;
+            }
+            #container-left {height:600px;width:20%;background-color:#00ffe5;float:left;
+            }
+            #container-mid {overflow:auto;height:600px;width:60%;background-color:aliceblue;float:left;
+            }
+            #container-right {height:600px;width:20%;background-color:#00ffe5;float:left;
+            }
+            #menu {margin:0px;padding:0px;
+            }
+            #menu>li {
+                list-style: none;
+                display: inline-block;
+                padding:10px 0px;
+                background-color:blue;
+                margin-right:-1px;
+            }
+                #menu > li > a {text-decoration:none;color:white;padding:10px 25px;
+                }
+        </style>
+    </head>
+    <body>
+<h2>
+Welcome To INDIACART.COM @if(Session["user"]!=null){<label style="margin-left:50px;color:red;">Welcome @ViewBag.name</label><label style="margin-left:100px;">@Html.ActionLink("logout","logout")</label> }<label style="margin-left:400px;">@Html.ActionLink("Cart","Cart_list", new {x=@Html.DisplayFor(model => model.ID), num=2}) (@ViewBag.count)</label>
+    </h2>
+         @Html.Partial("_Menu")
+<hr />
+        <div id="container">
+            @{
+                //var q = ViewBag.prod1;
+                var num = ViewBag.num;
+            }
+        <div id="container-left">
+            Catagory<br /><hr />
+            @foreach (var p in ViewBag.cat1)
+            {
+               <a href="~/Home/Index?x=@p.cat" >@p.cat</a><br />
+            }
+        </div>
+        <div id="container-mid">
+          <h2>Prod_details</h2>
+
+<fieldset>
+    <legend>Product</legend>
+
+
+     <div class="details" style="text-align:center;height:400px;width:300px;float:left;">
+                        
+    
+       <img src="~/Images/@Html.DisplayFor(model => model.ProductImage)" height="400" width="300" /><br />
+     </div>
+    <div class="details" style="text-align:center;height:400px;width:300px;float:left;box-shadow:0px 0px 5px blue;">
+                        
+      @Html.DisplayFor(model => model.ProductName)<hr />
+          @Html.DisplayFor(model => model.ProductPrice) /-<hr />
+       Off @Html.DisplayFor(model => model.Offer) %<br /><br /><br />
+        <a href="~/Home/Cart?x=@Html.DisplayFor(model => model.ID)"><input type="button" value="Add To Cart" /></a>
+       <a href="~/Home/Buy?x=@Html.DisplayFor(model => model.ID)"><input type="button" value="Buy Now" /></a>
+        <br /><br />
+        <label style="color:red;">@ViewBag.y</label>
+     </div>
+</fieldset>
+
+                 
+        </div>
+         <div id="container-right">
+
+        </div>
+        </div>
+    </body>
+</html>

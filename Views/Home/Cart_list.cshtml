@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Welcome To Gift Gallery";
+}
+
+
+<html>
+    <head>
+        <title>
+
+        </title>
+        <style>
+            body {margin:0px;
+            }
+            #container {height:600px;width:100%;background-color:white;
+            }
+            #container-left {height:600px;width:20%;background-color:#00ffe5;float:left;
+            }
+            #container-mid {overflow:auto;height:600px;width:60%;background-color:aliceblue;float:left;
+            }
+            #container-right {height:600px;width:20%;background-color:#00ffe5;float:left;
+            }
+            #menu {margin:0px;padding:0px;
+            }
+            #menu>li {
+                list-style: none;
+                display: inline-block;
+                padding:10px 0px;
+                background-color:blue;
+                margin-right:-1px;
+            }
+                #menu > li > a {text-decoration:none;color:white;padding:10px 25px;
+                }
+        </style>
+    </head>
+    <body>
+<h2>
+Welcome To INDIACART.COM @if(Session["user"]!=null){<label style="margin-left:50px;color:red;">Welcome @ViewBag.name</label><label style="margin-left:100px;">@Html.ActionLink("logout","logout")</label> }<label style="margin-left:50px;color:red;">@ViewBag.y</label><label style="margin-left:400px;"></label>
+    </h2>
+        @Html.Partial("_Menu")
+<hr />
+        @{
+            var i = 0;
+            var j = 0;
+            var s = 0;
+        }
+        <div id="container">
+            <p style="text-align:center;color:red;">@ViewBag.m</p>
+          <table border="0" width="100%">
+              <tr style="background-color:blue;color:white;"><td>Sl No</td><td>ProductName</td><td>ProductImage</td><td>ProductPrice(Rs)</td><td>Offer(%)</td><td>Net Price</td><td>Action</td></tr>
+              <tr><td colspan="7"><hr /></td></tr>
+              @foreach (var p in ViewBag.cart_list)
+              {
+                  i = i + 1;
+                  j = p.ProductPrice - p.ProductPrice * p.Offer/100;
+                  s = s + j;
+                <tr><td>@i</td><td>@p.ProductName</td><td><img src="~/Images/@p.ProductImage" height="80" width="60" /></td><td>@p.ProductPrice</td><td>@p.Offer</td><td>@j</td><td>@Html.ActionLink("Remove", "Remove", new { x=p.ID})</td></tr>
+              <tr><td colspan="7"><hr /></td></tr>
+              
+              }
+              <tr><td colspan="7"><hr /></td></tr>
+              <tr style="font-size:30px;"><td colspan="3">&nbsp;</td><td colspan="2">TOTAL</td><td colspan="2">@s /-</td></tr>
+              <tr><td colspan="7"><hr /></td></tr>
+              <tr style="text-align:center;font-size:20px;"><td colspan="7">@Html.ActionLink("Proceed", "Proceed", new { s=s})</td></tr>
+          </table> 
+        </div>
+    </body>
+</html>
